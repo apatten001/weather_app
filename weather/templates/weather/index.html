@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Weather4U</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md" style="height: 82px;background-color: #3ca1cc;">
+        <div class="container-fluid"><a class="navbar-brand" href="{% url 'weather:index' %}" style="font-family: 'Abril Fatface', cursive;">Weather4U</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navcol-1"></div>
+        </div>
+    </nav>
+    <section class="align-self-center" style="height: 600px;">
+        <div style="margin: 50px;">
+            <div class="row">
+                <div class="col">
+
+                    <h1>Add a city to track</h1>
+
+                        <form method="POST">
+                        {% csrf_token %}
+                        {{ form.name | capfirst }}
+                        <button type="submit" value="Add City" class="btn btn-primary">Add City</button>
+                        </form>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 101px;">
+                {%  for city_weather in weather_data %}
+
+                <div class="col-3 justify-content-center" id="weather" style="border: solid 2px black; margin: 5px; : aliceblue">
+                    <img src="https://openweathermap.org/img/w/{{ city_weather.icon }}.png">
+                    <h6 class="d-inline-flex">{{ city_weather.city }}</h6>
+                    <p class="align-content-center">max temp: {{ city_weather.temp }}º F
+                        <br>min temp: {{ city_weather.temp_min }}º F<br>
+                        {{ city_weather.description }}</p>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+
+</html>
