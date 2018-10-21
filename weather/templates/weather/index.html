@@ -24,7 +24,7 @@
 
                         <form method="POST">
                         {% csrf_token %}
-                        {{ form.name | capfirst }}
+                        {{ form.name }}
                         <button type="submit" value="Add City" class="btn btn-primary">Add City</button>
                         </form>
                 </div>
@@ -34,7 +34,7 @@
 
                 <div class="col-3 justify-content-center" id="weather" style="border: solid 2px black; margin: 5px; : aliceblue">
                     <img src="https://openweathermap.org/img/w/{{ city_weather.icon }}.png">
-                    <h6 class="d-inline-flex">{{ city_weather.city }}</h6>
+                    <h6 class="d-inline-flex">{{ city_weather.city | capfirst }}</h6>
                     <p class="align-content-center">max temp: {{ city_weather.temp }}º F
                         <br>min temp: {{ city_weather.temp_min }}º F<br>
                         {{ city_weather.description }}</p>
